@@ -7,8 +7,17 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var express = require('express');
+var AV = require('leanengine');
 
+AV.init({
+  appId: process.env.LEANCLOUD_APP_ID || 'SgHUH3ypaXdDmdjc30cLwEbt-gzGzoHsz',
+  appKey: process.env.LEANCLOUD_APP_KEY || 'HF1qBjo46s7BdOROSMVp2FxO',
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'RizDDjWxYmAF5jQmpq8emiT2'
+});
 var app = express();
+app.use(AV.express());
+app.listen(process.env.LEANCLOUD_APP_PORT);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
