@@ -1,5 +1,5 @@
 var express = require("express")();
-var http = require("http").Server(server);
+var http = require("http").Server(express);
 var io = require("socket.io")(http);
 var localStorage = require("localStorage");
 var AV = require('leanengine');
@@ -12,7 +12,7 @@ AV.init({
 
 var app = express();
 app.use(AV.express());
-app.listen(process.env.LEANCLOUD_APP_PORT);
+
 app.get("/", (req, res) => {
     res.send("You have reached the default route for the Make-ChatRooms Backend!")
 });
@@ -89,6 +89,6 @@ function getKeyByValue(object, value) { // Helper function to find username give
 }
 
 
-http.listen(4000, function () { // Begin listening on the port 4000 when the server is ran!
+app.listen(4000, function () { // Begin listening on the port 4000 when the server is ran!
     console.log("Listening on port 4000")
 });
