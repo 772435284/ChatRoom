@@ -1,33 +1,18 @@
-'use strict';
-
-var AV = require('leanengine');
-var http = require("http").Server(AV);
+var express = require("express")();
+var http = require("http").Server(server);
 var io = require("socket.io")(http);
 var localStorage = require("localStorage");
+var AV = require('leanengine');
+
 AV.init({
-  appId: process.env.LEANCLOUD_APP_ID,
-  appKey: process.env.LEANCLOUD_APP_KEY,
-  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+  appId: process.env.LEANCLOUD_APP_ID || 'SgHUH3ypaXdDmdjc30cLwEbt-gzGzoHsz',
+  appKey: process.env.LEANCLOUD_APP_KEY || 'HF1qBjo46s7BdOROSMVp2FxO',
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'RizDDjWxYmAF5jQmpq8emiT2'
 });
-// 如果不希望使用 masterKey 权限，可以将下面一行删除
-AV.Cloud.useMasterKey();
 
-var app = require('./app');
-
-// 端口一定要从环境变量 `LEANCLOUD_APP_PORT` 中获取。
-// LeanEngine 运行时会分配端口并赋值到该变量。
-var PORT = parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000);
-app.listen(PORT, function (err) {
-  console.log('Node app is running on port:', PORT);
-
-  // 注册全局未捕获异常处理器
-  process.on('uncaughtException', function(err) {
-    console.error('Caught exception:', err.stack);
-  });
-  process.on('unhandledRejection', function(reason, p) {
-    console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason.stack);
-  });
-});
+var app = express();
+app.use(AV.express());
+app.listen(process.env.LEANCLOUD_APP_PORT);
 app.get("/", (req, res) => {
     res.send("You have reached the default route for the Make-ChatRooms Backend!")
 });
@@ -102,3 +87,8 @@ io.on('connection', function (socket) {
 function getKeyByValue(object, value) { // Helper function to find username given the socket id or connection
     return Object.keys(object).find(key => object[key] === value);
 }
+
+
+http.listen(4000, function () { // Begin listening on the port 4000 when the server is ran!
+    console.log("Listening on port 4000")
+});
