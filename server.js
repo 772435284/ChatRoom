@@ -79,6 +79,3 @@ function getKeyByValue(object, value) { // Helper function to find username give
 }
 
 
-http.listen(sghuh3ypmzrm.leanapp.cn, function () { // Begin listening on the port 4000 when the server is ran!
-    console.log("Listening on port 4000")
-});
