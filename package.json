@@ -14,5 +14,8 @@
     "localStorage": "^1.0.4",
     "nodemon": "^1.18.10",
     "socket.io": "^2.2.0"
+  },
+  "engines": {
+    "node": "12.13.0"
   }
 }
