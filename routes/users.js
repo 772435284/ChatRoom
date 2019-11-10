@@ -77,5 +77,3 @@ io.on('connection', function (socket) {
 function getKeyByValue(object, value) { // Helper function to find username given the socket id or connection
     return Object.keys(object).find(key => object[key] === value);
 }
-
-
