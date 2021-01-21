@@ -15,7 +15,7 @@
     "leanengine": "^3.4.0",
     "localStorage": "^1.0.4",
     "nodemon": "^1.18.10",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   },
   "engines": {
     "node": "12.13.0"
